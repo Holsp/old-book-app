@@ -9,13 +9,12 @@ const prisma = new PrismaClient();
 
 type IChapter = {
    number: number,
-   title: string,
-   content: string
+   title: string
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
 
-   const book = (context.query.book)!.toString();
+   const book = (context.query.chapterSelection)!.toString();
    const bookId = parseInt(book);
 
 
@@ -33,18 +32,29 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 export default function ChapterSelection(props: { chapters: IChapter[] }) {
 
    const router = useRouter()
-   const { book } = router.query;
+   console.log(router.query);
+   const { chapterSelection } = router.query;
    const [chapters, setChapters] = useState(props.chapters);
 
+   const maxChapter = Math.max(...chapters.map(chapter => chapter.number));
+
+
+
+   ///////////////////////
+   // CHAPTER SELECTION //
+   ///////////////////////
+   // Page for selecting individual chapters
+   // Goes back to book selection
+   ///////////////////////
    return (
       <div>
-         <TopStyle />
+         <TopStyle link="/" />
          <div className="content">
-            <p>Post: {book}</p>
-            {chapters.map(item =>
-               <Link href={{
+            <h1>SELECT A CHAPTER</h1>
+            {chapters.map((item, key) =>
+               <Link key={key} href={{
                   pathname: "/chapterSelection/chapter",
-                  query: {title: item.title, content: item.content} 
+                  query: { chapterNumber: item.number, maxChapter: maxChapter }
                }}>
                   {item.title}
                </Link>

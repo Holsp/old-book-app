@@ -1,40 +1,42 @@
 import { PrismaClient } from "@prisma/client";
 import type { GetServerSideProps, NextPage } from 'next'
 import { useState } from "react";
-import Head from 'next/head'
-import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import Link from "next/link";
 import TopStyle from "../components/topStyle";
-
-
 const prisma = new PrismaClient();
+
 
 //book interface
 type IBook = {
-   name: String,
+   id:   number,
+   name: string,
 }
 
-//gets all avalibe books
-export const getServerSideProps: GetServerSideProps = async (content) => {
-   const books = await prisma.book.findMany({});
 
+export const getServerSideProps: GetServerSideProps = async (content) => {
+   //gets all avalibe books
+   const books = await prisma.book.findMany({});
    return { props: { books } }
 }
 
+
 const Home = (props: { books: IBook[] }) => {
    //fills books with those from the server
-   const [books, setBooks] = useState<IBook[]>(props.books);
+   const books = props.books;
 
 
+   /////////////////////////
+   // Main book selection //
+   /////////////////////////
    return (
       <div>
-         <TopStyle/>
+         <TopStyle link="/"/>
          <div className="content">
             <h1>SELECT A BOOK</h1>
             <div className={styles.books}>
-               {books.map(item =>
-                  <Link href="/chapterSelection/[chapter]" as="/chapterSelection/1">
+               {books.map((item, key) =>
+                  <Link key={key} href="/chapterSelection/[chapterSelection]" as={"/chapterSelection/" + item.id}>
                      <div className={styles.book}>
                         {item.name}
                      </div>

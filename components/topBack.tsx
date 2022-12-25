@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
    /////////////////
    // COLORED TOP //
    /////////////////
-export default function TopStyle({link, as} : {link: string, as? : string}) {
+export default function TopStyle({link, as, text} : {link: string, as? : string, text? : string}) {
 
    const [asData, setAsData] = useState<string>();
 
@@ -22,7 +22,11 @@ export default function TopStyle({link, as} : {link: string, as? : string}) {
 
    return (
       <div>
-         <Link href={link} as={asData}><div className="topColor" style={{ backgroundColor: "#813333" }}></div></Link>
+         <Link href={link} as={asData}>
+            <div className="topColor" style={{ backgroundColor: "#813333" }}>
+               <h2>{text}</h2>
+               </div>
+            </Link>
          <div className="topCorners"></div>
       </div>
    )

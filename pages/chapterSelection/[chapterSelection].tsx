@@ -1,4 +1,4 @@
-import TopStyle from "../../components/topStyle"
+import TopStyle from "../../components/topBack"
 import { GetServerSideProps } from "next";
 import { PrismaClient } from "@prisma/client";
 import { useRouter } from "next/router";
@@ -48,7 +48,7 @@ export default function ChapterSelection(props: { chapters: IChapter[] }) {
    ///////////////////////
    return (
       <div>
-         <TopStyle link="/" />
+         <TopStyle link="/" text="To book selection" />
          <div className="content">
             <h1>SELECT A CHAPTER</h1>
             {chapters.map((item, key) =>
@@ -56,7 +56,7 @@ export default function ChapterSelection(props: { chapters: IChapter[] }) {
                   pathname: "/chapterSelection/chapter",
                   query: { chapterNumber: item.number, maxChapter: maxChapter }
                }}>
-                  {item.title}
+                  <a>{item.number}. {item.title}</a>
                </Link>
             )}
          </div>

@@ -25,4 +25,5 @@ model Book {
   id        Int       @default(autoincrement())   @id
   chapters  Chapter[]
   name      String
+  imgSrc    String
 }

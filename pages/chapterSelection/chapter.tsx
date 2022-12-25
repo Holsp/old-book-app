@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
-import TopStyle from "../../components/topStyle";
+import TopStyle from "../../components/topBack";
 import Link from "next/link";
 import { GetServerSideProps } from "next";
 import { PrismaClient } from "@prisma/client";
@@ -40,12 +40,12 @@ export default function Chapter({ chapterData }: { chapterData: IChapter }) {
    //////////////////
    return (
       <div>
-         <TopStyle link="/chapterSelection/[book]" as={"/chapterSelection/" + chapterData.bookId} />
+         <TopStyle link="/chapterSelection/[book]" as={"/chapterSelection/" + chapterData.bookId} text="To chapter selection" />
          <div className="content">
-            <h1>{chapterData.title}</h1>
-            <div className="text">
+            <h1>{chapterData.number}. {chapterData.title}</h1>
+            <p className="chapterText">
                {chapterData.content}
-            </div>
+            </p>
             <div className="chapterSelect">
                <div>
                   {chapterData.number === 1 ? null : <Link href={{ pathname: "/chapterSelection/chapter", query: { chapterNumber: chapterData.number - 1, maxChapter: maxChapter } }}>Previous chapter</Link>}

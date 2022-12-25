@@ -10,7 +10,7 @@ body {
 .content {
    position: relative;
    width: 40%;
-   margin-top: -9vh;
+   margin-top: -15vh;
    margin-left: 30%;
    display: flex;
    flex-wrap: wrap;
@@ -19,12 +19,15 @@ body {
    transition: 0.2s;
    z-index: 10;
 }
+
 .content * {
    width: 100%;
 }
 
-.text {
- width: 100%;
+.chapterText {
+   font-family: "Times New Roman", Times, serif;
+   text-align: left;
+   width: 100%;
 }
 
 .chapterSelect {
@@ -40,12 +43,23 @@ body {
    height: 30vh;
    top: 0;
    z-index: 1;
+   cursor: pointer;
+}
+h2 {
+   text-align: center;
+   color: white;
+   margin: 2vh;
+   opacity: 0;
+   transition: 0.2s;
 }
 
-.topColor:hover ~ .topCorners {
+.topColor:hover~.topCorners {
    margin-top: 15vh;
 }
-
+.topColor:hover> h2 {
+   margin-top: 8vh;
+   opacity: 1;
+}
 
 .topCorners {
    position: relative;
@@ -57,4 +71,3 @@ body {
    transition: 0.2s;
    z-index: 2;
 }
-

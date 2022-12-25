@@ -4,5 +4,15 @@
 }
 
 .book {
+   width: 30%;
    margin: 2vh;
+   transition: 0.2s;
+   cursor: pointer;
+}
+.book:hover {
+   -webkit-filter: brightness(0.8);
+}
+
+.book * {
+   display: block !important;
 }
